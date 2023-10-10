@@ -1,5 +1,6 @@
 class overworldMap {
   constructor(config) {
+    this.transitions = config.transitions || {};  // Ensure a default value
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
     this.lowerImage = new Image();
@@ -54,11 +55,16 @@ window.overworldMaps = {
     midSrc: "/images/overworld-mid.png",
     secondMidSrc: "/images/overworld-upper-mid.png",
     upperSrc: "/images/overworld-top.png",
+
     gameObjects: {
       hero: new person({
         x: utils.widthGrid(15),
         y: utils.widthGrid(20),
       }),
+      
+    },
+    transitions: {
+      '352,272': { to: 'interior', x: -144, y: 24 } // For example, moving from (16,20) in palletteTown to (1,1) in interior
     },
     walls: {
       [utils.asGridCoords(208, 224)]: true,
@@ -125,7 +131,6 @@ window.overworldMaps = {
       [utils.asGridCoords(336, 256)]: true,
       [utils.asGridCoords(336, 240)]: true,
       [utils.asGridCoords(336, 224)]: true,
-      [utils.asGridCoords(352, 272)]: true,
       [utils.asGridCoords(368, 288)]: true,
       [utils.asGridCoords(384, 288)]: true,
       [utils.asGridCoords(400, 288)]: true,
@@ -139,8 +144,53 @@ window.overworldMaps = {
   interior: {
     lowerSrc: "/images/interior-bot.png",
     midSrc: "/images/interior-mid.png",
-    secondMidSrc: "/images/interior-top.png",
-    upperSrc: "",
+    secondMidSrc: "/images/interior-upper-mid.png",
+    upperSrc: "/images/interior-top.png",
+    transitions: {
+      '-144,40': { to: 'palletteTown', x: 352, y: 288 } // Reverse transition as an example
+    },
+
+    walls: {
+      [utils.asGridCoords(-160, 24)]: true,
+      [utils.asGridCoords(-160, 8)]: true,
+      [utils.asGridCoords(-160, -8)]: true,
+      [utils.asGridCoords(-160, -24)]: true,
+      [utils.asGridCoords(-160, -40)]: true,
+      [utils.asGridCoords(-160, -56)]: true,
+      [utils.asGridCoords(-160, -72)]: true,
+      [utils.asGridCoords(-160, -88)]: true,
+      [utils.asGridCoords(-160, -104)]: true,
+      [utils.asGridCoords(-144, -24)]: true,
+      [utils.asGridCoords(-128, -8)]: true,
+      [utils.asGridCoords(-112, -8)]: true,
+      [utils.asGridCoords(-96, -8)]: true,
+      [utils.asGridCoords(-80, -24)]: true,
+      [utils.asGridCoords(-64, -24)]: true,
+      [utils.asGridCoords(-48, -8)]: true,
+      [utils.asGridCoords(-48, 8)]: true,
+      [utils.asGridCoords(-48, -24)]: true,
+      [utils.asGridCoords(-48, -40)]: true,
+      [utils.asGridCoords(-64, -40)]: true,
+      [utils.asGridCoords(-80, -40)]: true,
+      [utils.asGridCoords(-96, -40)]: true,
+      [utils.asGridCoords(-112, -40)]: true,
+      [utils.asGridCoords(-128, -40)]: true,
+      [utils.asGridCoords(-144, -40)]: true,
+      [utils.asGridCoords(-144, -104)]: true,
+      [utils.asGridCoords(-128, -120)]: true,
+      [utils.asGridCoords(-112, -120)]: true,
+      [utils.asGridCoords(-96, -120)]: true,
+      [utils.asGridCoords(-80, -104)]: true,
+      [utils.asGridCoords(-80, -88)]: true,
+      [utils.asGridCoords(-64, -88)]: true,
+      [utils.asGridCoords(-48, -88)]: true,
+      [utils.asGridCoords(-32, -104)]: true,
+      [utils.asGridCoords(-16, -104)]: true,
+      [utils.asGridCoords(0, -104)]: true,
+      [utils.asGridCoords(16, -104)]: true,
+      [utils.asGridCoords(32, -88)]: true,
+
+        },
     gameObjects: {
       hero: new person({
         x: utils.widthGrid(1),
